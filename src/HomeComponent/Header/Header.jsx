@@ -91,6 +91,7 @@ const HandleChange = (e) => {
   
 
 
+
 // HandleSearch Function Start Here
 const HandleSearch = (event) => {
   if (ValueData) {
@@ -100,7 +101,8 @@ const HandleSearch = (event) => {
     setSearchProductData(SearchData);
   }else {
     setSearchProductData([]);
-  }
+  };
+
 };
 //HandleResult Function Start Here
 const HandleResult = (Result) => {

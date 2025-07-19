@@ -8,12 +8,17 @@ import Loading from '../../CommonComponent/Loading/Loading'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { WishCartItem} from '../../Redux/WishSlice/WishSlice'
+import { useContext } from "react";
+import { CatagoriContex } from '../../Pages/Home/Home'
+
 
 const BestSellingProduct = () => {
   const dispatch = useDispatch();
   const[featureData,setfeatureData] =useState([]);
   const Navigate = useNavigate();
-
+  const CatValue = useContext(CatagoriContex);
+  
+   
   
 
   useEffect(() => {
@@ -51,6 +56,8 @@ const HandleWish = (item) => {
 
 
 
+
+
   return (
     <>
       <div className="bg-TopHColor py-10 pb-40">
@@ -75,25 +82,45 @@ const HandleWish = (item) => {
                   "items-center flex-wrap justify-center xl:justify-between gap-y-4 gap-x-4 xl:gap-x-0"
                 }
               >
-                {featureData?.map((item) => (
-                  <div key={item.id}>
-                    <div>
-                      <Card
-                        ProductDetails={() => HandleProduct(item)}
-                        CartProduct={() => HandleCart(item)}
-                        WishProduct={() => HandleWish(item)}
-                        FeatueImage={item.thumbnail}
-                        Title={`${item.title.slice(0, 16)}....`}
-                        MainPrice={`$${Math.round(item.price)}`}
-                        Price={`$${
-                          Math.round(item.price) -
-                          Math.round(item.price) *
-                            (Math.round(item.discountPercentage) / 100)
-                        }`}
-                      />
-                    </div>
-                  </div>
-                ))}
+                {CatValue
+                  ? CatValue?.map((item) => (
+                      <div key={item.id}>
+                        <div>
+                          <Card
+                            ProductDetails={() => HandleProduct(item)}
+                            CartProduct={() => HandleCart(item)}
+                            WishProduct={() => HandleWish(item)}
+                            FeatueImage={item.thumbnail}
+                            Title={`${item.title.slice(0, 16)}....`}
+                            MainPrice={`$${Math.round(item.price)}`}
+                            Price={`$${
+                              Math.round(item.price) -
+                              Math.round(item.price) *
+                                (Math.round(item.discountPercentage) / 100)
+                            }`}
+                          />
+                        </div>
+                      </div>
+                    ))
+                  : featureData?.map((item) => (
+                      <div key={item.id}>
+                        <div>
+                          <Card
+                            ProductDetails={() => HandleProduct(item)}
+                            CartProduct={() => HandleCart(item)}
+                            WishProduct={() => HandleWish(item)}
+                            FeatueImage={item.thumbnail}
+                            Title={`${item.title.slice(0, 16)}....`}
+                            MainPrice={`$${Math.round(item.price)}`}
+                            Price={`$${
+                              Math.round(item.price) -
+                              Math.round(item.price) *
+                                (Math.round(item.discountPercentage) / 100)
+                            }`}
+                          />
+                        </div>
+                      </div>
+                    ))}
               </Flex>
             )}
           </div>

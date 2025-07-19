@@ -7,6 +7,17 @@
   
   ];
 
+    export const CatagoriesData = [
+      { id: 1, catagory: "Beauty" },
+      { id: 2, catagory: "Fragrances" },
+      { id: 3, catagory: "Furniture" },
+      { id: 4, catagory: "Groceries" },
+      { id: 5, catagory: "Women's Fashion" },
+      { id: 6, catagory: "Men's Fashion" },
+      { id: 6, catagory: "Electronics" },
+    ];
+
+
   export const CountryName = [
      {
       id: 1,
