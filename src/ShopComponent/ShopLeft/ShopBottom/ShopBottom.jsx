@@ -11,9 +11,10 @@ import { WishCartItem } from '../../../Redux/WishSlice/WishSlice';
 
 
 
-const ShopBottom = ({pageValue}) => {
+const ShopBottom = ({pageValue,catItem}) => {
  
   
+console.log(catItem);
 
 const dispatch = useDispatch()
 const[allData,setallData] = useState([]);
@@ -73,7 +74,10 @@ const HandleWish = (item) => {
         <div>
           {Status === "LOADING" ? (
             <p>
-              <Loading className={"flex items-center flex-wrap gap-y-4 gap-x-4"} LoadItem={pageValue}/>
+              <Loading
+                className={"flex items-center flex-wrap gap-y-4 gap-x-4"}
+                LoadItem={pageValue}
+              />
             </p>
           ) : (
             <Flex
@@ -81,25 +85,43 @@ const HandleWish = (item) => {
                 "items-center justify-center md:justify-start flex-wrap gap-x-6 gap-y-6"
               }
             >
-              {allData
-                ?.slice(page * Value - Value, page * Value)
-                .map((item) => (
-                  <div key={item.id}>
-                    <Card
-                      ProductDetails={() => HandleshopDetails(item)}
-                      CartProduct={() => HandleCart(item)}
-                      WishProduct={() => HandleWish(item)}
-                      FeatueImage={item.thumbnail}
-                      Title={`${item.title.slice(0, 16)}....`}
-                      MainPrice={`$${Math.round(item.price)}`}
-                      Price={`${
-                        Math.round(item.price) -
-                        Math.round(item.price) *
-                          (Math.round(item.discountPercentage) / 100)
-                      }`}
-                    />
-                  </div>
-                ))}
+              {catItem
+                ? catItem?.slice(page * Value - Value, page * Value).map((item) => (
+                    <div key={item.id}>
+                      <Card
+                        ProductDetails={() => HandleshopDetails(item)}
+                        CartProduct={() => HandleCart(item)}
+                        WishProduct={() => HandleWish(item)}
+                        FeatueImage={item.thumbnail}
+                        Title={`${item.title.slice(0, 16)}....`}
+                        MainPrice={`$${Math.round(item.price)}`}
+                        Price={`${
+                          Math.round(item.price) -
+                          Math.round(item.price) *
+                            (Math.round(item.discountPercentage) / 100)
+                        }`}
+                      />
+                    </div>
+                  ))
+                : allData
+                    ?.slice(page * Value - Value, page * Value)
+                    .map((item) => (
+                      <div key={item.id}>
+                        <Card
+                          ProductDetails={() => HandleshopDetails(item)}
+                          CartProduct={() => HandleCart(item)}
+                          WishProduct={() => HandleWish(item)}
+                          FeatueImage={item.thumbnail}
+                          Title={`${item.title.slice(0, 16)}....`}
+                          MainPrice={`$${Math.round(item.price)}`}
+                          Price={`${
+                            Math.round(item.price) -
+                            Math.round(item.price) *
+                              (Math.round(item.discountPercentage) / 100)
+                          }`}
+                        />
+                      </div>
+                    ))}
             </Flex>
           )}
 

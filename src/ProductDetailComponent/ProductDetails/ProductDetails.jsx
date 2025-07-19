@@ -47,7 +47,7 @@ useEffect(() => {
 
 const{CartItem}=useSelector((state) => state.Product);
 
-console.log(CartItem.id);
+
 
 
 // HandleCart Function Start Here
@@ -266,6 +266,24 @@ function SamplePrevArrow(props) {
                 <h2 className="font-Montserrat font-semibold">Sku:</h2>
                 <p className="font-Montserrat font-light">
                   {CartItem.sku ? `"${CartItem.sku}"` : "Missing"}
+                </p>
+              </div>
+              <div className="flex items-center gap-x-2">
+                <h2 className="font-Montserrat font-semibold">Brand:</h2>
+                <p className="font-Montserrat font-light">
+                  {CartItem.sku ? `${CartItem.brand}` : "Mixed"}
+                </p>
+              </div>
+              <div className="flex items-center gap-x-2">
+                <h2 className="font-Montserrat font-semibold">Warranty:</h2>
+                <p className="font-Montserrat font-light">
+                  {CartItem.sku ? `${CartItem.warrantyInformation}` : "No worranty"}
+                </p>
+              </div>
+               <div className="flex items-center gap-x-2">
+                <h2 className="font-Montserrat font-semibold">Stock:</h2>
+                <p className="font-Montserrat font-light">
+                  {CartItem.sku ? `${CartItem.availabilityStatus}` : "No worranty"}
                 </p>
               </div>
             </div>

@@ -1,19 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Flex from "../../../CommonComponent/Flex"
 import ShopBottom from '../ShopBottom/ShopBottom';
 import ShopRight from '../../ShopRight/ShopRight';
 import { DropdownShowData } from '../../../../JsonData/JsonData';
+import { useSelector } from 'react-redux';
+
 
 
 
 const ShopTop = () => {
-  const[pageItemValue,setpageItemValue] = useState(9)
+
+const[catItem,setcatItem] = useState("");
+const [selectedCategory, setSelectedCategory] = useState(null);
+const [allData, setallData] = useState([]); 
+const[pageItemValue,setpageItemValue] = useState(9)
 
   //HandleValue Function Start here
   const HandleValue = (e) => {
     setpageItemValue(e.target.value); 
   };
 
+const{CartItem,Status}= useSelector((state) => state.Product);
+
+
+
+
+
+useEffect(() => {
+  if (Status === "IDLE") {
+    setallData(CartItem.products);
+  }
+}, [Status, CartItem.products]);
+  
+// HandleCatItem Function Start Here
+
+
+const HandleCatagoritItem = (item) => {
+
+ if(selectedCategory === item.catagory){
+    setSelectedCategory(null);
+    setcatItem(allData)
+ }else{
+   const filterData = allData.filter(
+     (Cat) => Cat.category.toLowerCase() === item.catagory.toLowerCase()
+   );
+   setcatItem(filterData);
+   setSelectedCategory(item.catagory)
+ }
+ 
+};
 
   
   
@@ -60,11 +95,11 @@ const ShopTop = () => {
                 </div>
               </Flex>
               <div className="mt-16 w-full 2xl:w-[914px]">
-                <ShopBottom pageValue={pageItemValue}/> 
+                <ShopBottom pageValue={pageItemValue} catItem={catItem}/> 
               </div>
             </div>
             <div className="hidden xl:block">
-              <ShopRight />
+              <ShopRight OnCatagoritem={HandleCatagoritItem} selectedCategory={selectedCategory}/>
             </div>
           </Flex>
         </div>

@@ -14,6 +14,7 @@ import Rocket from "../../assets/HomeComponentpic/Rocket.png"
 import MarterCard from "../../assets/HomeComponentpic/MasterCard.png"
 import Paypal from "../../assets/HomeComponentpic/Paypal.png"
 import Visa from "../../assets/HomeComponentpic/Visa.png"
+import { Link } from 'react-router-dom';
 
 
 const Footer = () => {
@@ -137,15 +138,25 @@ const Footer = () => {
                 Get In Touch
               </h2>
               <div className="flex items-center justify-center md:justify-start gap-x-3">
-                <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
-                  <FaFacebookSquare />
-                </span>
-                <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
-                  <FaLinkedin />
-                </span>
-                <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
-                  <FaGithubSquare />
-                </span>
+                <Link to={"https://www.facebook.com/share/1Duhy3A2xh/"}>
+                  <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
+                    <FaFacebookSquare />
+                  </span>
+                </Link>
+                <Link
+                  to={
+                    "https://www.linkedin.com/in/mahmudul-hasan-788019168?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                  }
+                >
+                  <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
+                    <FaLinkedin />
+                  </span>
+                </Link>
+                <Link to={"https://github.com/mahmudulhasanprodan"}>
+                  <span className="text-2xl cursor-pointer text-iconColor hover:text-CommonColor">
+                    <FaGithubSquare />
+                  </span>
+                </Link>
               </div>
             </div>
           </Flex>

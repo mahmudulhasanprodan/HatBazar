@@ -1,20 +1,64 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Flex from '../../CommonComponent/Flex';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { EmailValidation } from '../../../Utils/Utils';
+import { ErrorToast } from '../../../Utils/Utils';
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged  } from "firebase/auth";
 
 const LoginDetails = () => {
+
+  const auth = getAuth();
+   const Navigate = useNavigate();
+  const[LoginDetails,setLoginDetails] = useState({
+    EmailAddress: "",
+    LoginPassword : "",
+  })
+
+
+// HandleLogin Function start Here
+const HandleLogin = (e) => {
+    setLoginDetails({
+      ...LoginDetails,
+      [e.target.id] : e.target.value,
+    })
+};
+
+// Handlesignin Function start Here
+ const Handlesignin = () => {
+   const { EmailAddress, LoginPassword } = LoginDetails;
+   if(!EmailAddress && !EmailValidation(EmailAddress)){
+      ErrorToast("Username or Password not Valid","top-center")
+   }else if(!LoginPassword){
+    ErrorToast("Username or Password not Valid", "top-center");
+   }else{
+    signInWithEmailAndPassword(auth,LoginDetails.EmailAddress,LoginDetails.LoginPassword).then((UserCredential) => {
+      onAuthStateChanged(auth, (user) => {
+        if(user.emailVerified){
+         Navigate("/checkout")
+        }else{
+          ErrorToast("Email is not Verified","top-center")
+        }
+        console.log(user.emailVerified);
+        
+      });
+    })
+ 
+   }
+ };
+
   return (
     <>
       <div className="bg-TopHColor py-20">
         <div className="container">
           <div className="flex items-center justify-center px-4 md:px-0">
             <div className="w-[400px] h-[400px] bg-gray-200 rounded-lg">
-              <Flex className={"flex-col gap-y-4 items-center mt-10 px-2 md:px-2"}>
+              <Flex
+                className={"flex-col gap-y-4 items-center mt-10 px-2 md:px-2"}
+              >
                 <div className="">
                   <h2 className="font-Montserrat font-bold text-3xl">Login</h2>
                 </div>
@@ -31,6 +75,7 @@ const LoginDetails = () => {
                       name="EmailAddress"
                       placeholder="Enter your email here"
                       className="border-[1px] w-72 h-10 pl-3"
+                      onChange={HandleLogin}
                     />
                   </div>
                 </div>
@@ -47,11 +92,15 @@ const LoginDetails = () => {
                       name="LoginPassword"
                       placeholder="passsword"
                       className="border-[1px] w-72 h-10 pl-3"
+                      onChange={HandleLogin}
                     />
                   </div>
                 </div>
                 <div>
-                  <button className="px-10 py-2 bg-CommonColor font-Montserrat font-bold text-white rounded-md">
+                  <button
+                    className="px-10 py-2 bg-CommonColor font-Montserrat font-bold text-white rounded-md"
+                    onClick={Handlesignin}
+                  >
                     Login here
                   </button>
                 </div>

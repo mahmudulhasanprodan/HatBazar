@@ -18,6 +18,8 @@ const BestSellingProduct = () => {
   const Navigate = useNavigate();
   const CatValue = useContext(CatagoriContex);
   
+  
+  
    
   
 

@@ -111,6 +111,11 @@ const HandleResult = (Result) => {
   Navigate(`/productdetails/${Result.id}`) 
 };
   
+const handleKeyPress = (e) => {
+  if (e.key === "Enter") {
+    HandleSearch();
+  }
+};
 
 
 
@@ -140,6 +145,7 @@ const HandleResult = (Result) => {
                     name="ProductSearch"
                     className="border-2 border-CommonColor md:w-[260px] xl:w-[400px] py-1 pl-3"
                     onChange={HandleChange}
+                    onKeyDown={handleKeyPress}
                   />
                 </div>
                 {SearchProductData.length > 0 &&

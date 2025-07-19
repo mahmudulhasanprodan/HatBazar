@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { SuccessToast } from '../../../Utils/Utils';
+import { ErrorToast } from '../../../Utils/Utils';
 
 const initialState = {
   CartProduct: localStorage.getItem("Cartitem")
@@ -20,11 +21,11 @@ export const CartSLice = createSlice({
        if(FindValue >= 0){
         state.CartProduct[FindValue].CartQuantity += 1;
         localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));
-        SuccessToast(action.payload.title);
+          SuccessToast(`${action.payload.title} Again Added`,"top-left");
        }else{
          state.CartProduct.push({ ...action.payload, CartQuantity: 1 });
           localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));
-          SuccessToast(action.payload.title);
+          SuccessToast(`${action.payload.title} Added To Cart`);
        }
      },
      RemoveItem: (state,action) => {
@@ -33,6 +34,7 @@ export const CartSLice = createSlice({
          );
         (state.CartProduct = remove),
           localStorage.setItem("Cartitem", JSON.stringify(state.CartProduct));  
+          ErrorToast(`${action.payload.title} Item Removed From Cart`, "top-center")
 
      },
      Increment: (state,action)=> {
@@ -40,7 +42,8 @@ export const CartSLice = createSlice({
          (item) => item.id === action.payload.id
        );         
        state.CartProduct[InDex].CartQuantity += 1
-       localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));    
+       localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));  
+       SuccessToast(`${action.payload.title} Increment`,"bottom-right")  
      },
      Decrement: (state,action) => {
         const DecrementInDex = state.CartProduct.findIndex(
@@ -49,6 +52,7 @@ export const CartSLice = createSlice({
        if(state.CartProduct[DecrementInDex].CartQuantity > 1){
          state.CartProduct[DecrementInDex].CartQuantity -= 1;
          localStorage.setItem("Cartitem", JSON.stringify(state.CartProduct)); 
+          ErrorToast(`${action.payload.title} Decrement`, "bottom-right")
       }  
      },
      GetTotal: (state,action) => {  

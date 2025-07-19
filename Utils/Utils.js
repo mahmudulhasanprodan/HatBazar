@@ -25,7 +25,7 @@ transition: Bounce,
 };
 
 export function ErrorToast(title,position="top-right") {
-    toast.success(title, {
+    toast.error(title, {
 position: position,
 autoClose: 5000,
 hideProgressBar: false,
@@ -33,7 +33,7 @@ closeOnClick: false,
 pauseOnHover: true,
 draggable: true,
 progress: undefined,
-theme: "light",
+theme: "dark",
 transition: Bounce,
 });
 };

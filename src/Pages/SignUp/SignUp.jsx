@@ -7,12 +7,14 @@ import { getAuth,createUserWithEmailAndPassword ,sendEmailVerification} from "fi
 import { SuccessToast } from '../../../Utils/Utils';
 import { collection, addDoc } from "firebase/firestore"; 
 import { db } from '../../../Firebase/FirebaseSDK';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const SignUp = () => {
 
- const auth = getAuth();
+const auth = getAuth();
+const Navigate = useNavigate();
 const[loading,setloading] =useState(false);
   const[SignUpData,setSignUpData] = useState({
     FullName : "",
@@ -105,7 +107,9 @@ const HandleSubmit = (e) => {
       .then(() => {
         addDoc(collection(db, "SignUp_Data"), SignUpData)
           .then((userCredential) => {
-            sendEmailVerification(auth.currentUser).then(() => {});
+            sendEmailVerification(auth.currentUser).then(() => {
+              Navigate("/login")
+            });
           })
           .catch((error) => {
             console.log(error);
