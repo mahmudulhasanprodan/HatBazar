@@ -33,7 +33,7 @@ const CartItem = () => {
                 </div>
               </Flex>
               {/* Cart Product Item Is Here */}
-              <div className="h-[800px] md:h-[400px] md:overflow-y-scroll">
+              <div className="h-[600px] md:h-[400px] md:overflow-y-scroll">
                 <div>
                   <CartProducts />
                 </div>

@@ -178,10 +178,10 @@ function SamplePrevArrow(props) {
 
   return (
     <>
-      <div>
+      <div className="px-4 md:px-0 -z-10">
         <div className="container">
-          <Flex className={"gap-x-10 py-10"}>
-            <div className="w-[400px]">
+          <Flex className={"flex-col md:flex-row gap-x-10 py-10"}>
+            <div className="md:w-[400px]">
               <Slider {...settings}>
                 {CartItem.images?.map((img, index) => (
                   <div key={index} className="relative">
@@ -190,7 +190,7 @@ function SamplePrevArrow(props) {
                         <img
                           src={img}
                           alt={img}
-                          className="border-2 w-[400px] h-[400px]"
+                          className="border-2 w-full md:w-[400px] h-full md:h-[400px]"
                         />
                       </picture>
                     </Zoom>
@@ -292,7 +292,7 @@ function SamplePrevArrow(props) {
             <h2 className="border-b-[1px] mb-10 font-Montserrat font-bold text-xl">
               Description
             </h2>
-            <p className="font-Montserrat w-3/2 text-justify font-bold text-base w-2/3">
+            <p className="font-Montserrat w-full md:w-3/2 text-justify font-bold text-base w-2/3">
               {CartItem.description
                 ? CartItem.description
                 : "Desicription Missing"}
@@ -313,7 +313,7 @@ function SamplePrevArrow(props) {
                   InputType={"text"}
                   InputPlaceholder={"Enter your Name"}
                   InputId={"Name"}
-                  InputClass={"border-b-[1px] w-96 py-1"}
+                  InputClass={"border-b-[1px] w-full md:w-96 py-1"}
                   OnChangeItem={HandleChange}
                   ValueForm={commentinput.Name}
                 />
@@ -331,7 +331,7 @@ function SamplePrevArrow(props) {
                     name="InputMessege"
                     id="InputMessege"
                     placeholder="Messege here"
-                    className="min-h-44 border-[1px] w-96 pl-3"
+                    className="min-h-44 border-[1px] w-full md:w-96 pl-3"
                     onChange={HandleChange}
                     value={commentinput.InputMessege}
                   ></textarea>

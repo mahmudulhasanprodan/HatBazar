@@ -35,16 +35,22 @@ const HandleDecrement = (item) => {
           <div key={item.id}>
             <Flex
               className={
-                "items-center justify-between md:justify-start border-b-[1px] py-2"
+                "md:items-center flex-col md:flex-row justify-between md:justify-start border-b-[1px] py-2"
               }
             >
-              <div className="flex items-center basis-1/3 pl-3 font-Montserrat font-semibold">
+              <div className="flex items-center basis-1/3 pl-3 font-Montserrat font-semibold relative">
                 <picture>
                   <img
                     src={item.thumbnail}
                     alt={item.thumbnail}
-                    className="w-10 h-10 md:w-16 md:h-16 border-2 shadow-lg cursor-pointer"
+                    className="w-16 h-16 border-2 shadow-lg cursor-pointer"
                   />
+                   <p
+                  className="absolute -top-3 left-1 text-xl font-bold text-CommonColor hover:text-green-500 cursor-pointer md:hidden"
+                  onClick={() => HandleRemove(item)}
+                >
+                  X
+                </p>
                 </picture>
                 <h2 className="font-Montserrat text-xs  md:text-base pl-3">
                   {item.title ? item.title : "Title Missing"}
@@ -61,14 +67,14 @@ const HandleDecrement = (item) => {
                 </p>
               </div>
 
-              <div className="basis-1/4 pl-3 font-Montserrat font-semibold py-4 flex items-center gap-x-3">
+              <div className="basis-1/4 pl-3 font-Montserrat font-semibold py-4 flex items-center md:justify-start justify-center gap-x-3">
                 <span
                   className="cursor-pointer  md:font-bold border-2 md:px-2 md:py-1 border-gray-500 active:bg-CommonColor active:text-white"
                   onClick={() => HandleDecrement(item)}
                 >
                   <FaMinus />
                 </span>
-                <p className="font-Montserrat font-bold text-sm md:text-xl">
+                <p className="font-Montserrat font-bold text-green-600 md:text-black text-md md:text-xl">
                   {item.CartQuantity}
                 </p>
                 <span
@@ -79,14 +85,14 @@ const HandleDecrement = (item) => {
                 </span>
               </div>
               <div className="basis-1/4 pl-3 md:font-semibold relative flex">
-                <h3 className="font-Montserrat pl-5 font-thin text-md ">{`$${Math.round(
+                <h3 className="font-Montserrat pl-5 font-bold text-md text-green-600 md:text-black">{`$${Math.round(
                   `${Math.round(
                     item.price -
                       Math.round(item.price * item.discountPercentage) / 100
                   )}` * item.CartQuantity
                 )}`}</h3>
                 <p
-                  className="absolute right-3 cursor-pointer text-red-500 text-xl"
+                  className="absolute right-3 cursor-pointer text-red-500 text-xl hidden md:block"
                   onClick={() => HandleRemove(item)}
                 >
                   X

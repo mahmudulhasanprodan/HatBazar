@@ -75,7 +75,7 @@ const HandleWish = (item) => {
           {Status === "LOADING" ? (
             <p>
               <Loading
-                className={"flex items-center flex-wrap gap-y-4 gap-x-4"}
+                className={"flex items-center justify-center md:justify-start flex-wrap gap-y-4 gap-x-4"}
                 LoadItem={pageValue}
               />
             </p>

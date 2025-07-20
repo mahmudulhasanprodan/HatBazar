@@ -13,9 +13,12 @@ import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from 'react-redux'
 import { GetTotal } from '../../Redux/CartSlice/CartSlice';
 import { RemoveItem } from '../../Redux/CartSlice/CartSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Links, useNavigate } from 'react-router-dom';
 import { WishGetTotal } from '../../Redux/WishSlice/WishSlice';
 import { FaShopware } from "react-icons/fa";
+import { HiMiniShoppingBag } from "react-icons/hi2";
+import { IoLogIn } from "react-icons/io5";
+
 
 
 const Header = () => {
@@ -38,6 +41,7 @@ useEffect(() => {
    if (ItemRef.current && ItemRef.current.contains(e.target)) {
       setShowcartMenu(false)   
    }
+  
  });
  return(() => {
   window.addEventListener("click",() => {})
@@ -143,7 +147,7 @@ const handleKeyPress = (e) => {
                     placeholder="Search Products"
                     id="ProductSearch"
                     name="ProductSearch"
-                    className="border-2 border-CommonColor md:w-[260px] xl:w-[400px] py-1 pl-3"
+                    className="border-2 border-CommonColor  md:w-[260px] xl:w-[400px] py-1 pl-3"
                     onChange={HandleChange}
                     onKeyDown={handleKeyPress}
                   />
@@ -204,7 +208,7 @@ const handleKeyPress = (e) => {
                           className={"absolute z-10 top-[44px] right-0"}
                           ref={ItemRef}
                         >
-                          <div className="w-[300px] min-h-[500px] bg-gray-300 px-2">
+                          <div className="w-[300px] min-h-[500px] bg-gray-300 px-2 ">
                             <div className="w-full min-h-[350px] max-h-[450px] overflow-y-scroll">
                               {CartProduct?.map((item) => (
                                 <Flex
@@ -296,7 +300,7 @@ const handleKeyPress = (e) => {
                 </div>
               </Flex>
 
-              <div className="md:hidden">
+              <div className="md:hidden" >
                 <span
                   className="text-xl font-bold cursor-pointer"
                   onClick={HandleMenuItem}
@@ -306,29 +310,46 @@ const handleKeyPress = (e) => {
                 {/* DropDown Menu */}
                 {menuItem && (
                   <div
-                    className={`md:hidden absolute w-[200px] h-[400px] bg-gray-700 top-[80px] -right-[1000px]  ${
+                    className={`md:hidden absolute w-[200px] h-[400px] bg-gray-700 top-[80px] -right-[1000px] z-10  ${
                       menuItem && "right-[0px]"
                     }`}
+                   
+                    
                   >
                     <div className={"flex flex-col gap-y-4"}>
-                      <div className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-300 py-2 justify-center text-white">
-                        <span className="text-sm">
-                          <IoMdHome />
-                        </span>
-                        <h2 className="font-Montserrat text-sm">Home</h2>
-                      </div>
+                      <Link to={"/"}>
+                        <div className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white">
+                          <span className="text-sm">
+                            <IoMdHome />
+                          </span>
+                          <h2 className="font-Montserrat text-sm">Home</h2>
+                        </div>
+                      </Link>
+                      <Link to={"/shop"}>
+                        <div
+                          div
+                          className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white"
+                        >
+                          <span className="text-xs">
+                            <HiMiniShoppingBag />
+                          </span>
+                          <h2 className="font-Montserrat text-sm">Shop</h2>
+                        </div>
+                      </Link>
+                       <Link to={"/cart"}>
+                        <div
+                          div
+                          className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white"
+                        >
+                          <span className="text-xs">
+                            <FaShoppingCart />
+                          </span>
+                          <h2 className="font-Montserrat text-sm">Cart</h2>
+                        </div>
+                      </Link>
                       <div
                         div
-                        className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-300 py-2 justify-center text-white"
-                      >
-                        <span className="text-xs">
-                          <FaShoppingCart />
-                        </span>
-                        <h2 className="font-Montserrat text-sm">Shop</h2>
-                      </div>
-                      <div
-                        div
-                        className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-300 py-2 justify-center text-white"
+                        className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white"
                       >
                         <span className="text-xs">
                           <BsFillFilePersonFill />
@@ -337,13 +358,24 @@ const handleKeyPress = (e) => {
                       </div>
                       <div
                         div
-                        className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-300 py-2 justify-center text-white"
+                        className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white"
                       >
                         <span className="text-sm">
                           <MdOutlineCallSplit />
                         </span>
                         <h2 className="font-Montserrat text-sm">Contact Us</h2>
                       </div>
+                      <Link to={"/login"}>
+                        <div
+                          div
+                          className="flex items-center gap-x-1 cursor-pointer hover:bg-slate-500 py-2 pl-10 text-white"
+                        >
+                          <span className="text-xs">
+                            <IoLogIn />
+                          </span>
+                          <h2 className="font-Montserrat text-sm">Login</h2>
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 )}
